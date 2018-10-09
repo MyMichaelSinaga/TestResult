@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-module.exports = mongoose.model('tblSupir', tblSupirSchema);
 
 //tblKendaraan Schema
 var tblKendaraanSchema = mongoose.Schema({
@@ -16,10 +15,7 @@ var tblKendaraanSchema = mongoose.Schema({
 	},
 	order:{
 		type: Number
-	},
-	id_supir:[
-      {type: Schema.Types.ObjectId, ref: 'tblSupir'}
-    ]
+	}
 });
 
 var TblKendaraan =  module.exports = mongoose.model('TblKendaraan', tblKendaraanSchema);
@@ -41,7 +37,7 @@ module.exports.addTblKendaraan = function(tblKendaraan, callback){
 
 //update TblKendaraan
 module.exports.updateTblKendaraan = function(id, tblKendaraan, options, callback){
-	var query = {_id:, id};
+	var query = {_id: id};
 	var update = {
 		tipeKendaraan: tblKendaraan.tipeKendaraan,
 		imageSource: tblKendaraan.imageSource,
@@ -52,7 +48,7 @@ module.exports.updateTblKendaraan = function(id, tblKendaraan, options, callback
 }
 
 //delete tblKendaraan
-module.exports.deleteTblKendaraan = function(tblKendaraan, callback){
-	var query = {_id:, id};
+module.exports.removeTblKendaraan = function(id, callback){
+	var query = {_id: id};
 	TblKendaraan.remove(query, callback);
 }
